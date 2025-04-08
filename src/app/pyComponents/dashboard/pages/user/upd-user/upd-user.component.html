@@ -1,0 +1,129 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+  <div class="bg-gray-200 p-8 rounded-lg shadow-md w-full max-w-lg relative">
+    <!-- Botón de cierre -->
+    <div class="absolute top-4 right-4">
+      <button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-300 transition-colors" mat-dialog-close>
+        <mat-icon class="text-gray-800">close</mat-icon>
+      </button>
+    </div>
+
+    <h2 class="text-2xl font-bold text-gray-800 text-center mb-4">Actualizar Usuario</h2>
+    <mat-divider class="bg-gray-300 mb-4"></mat-divider>
+
+    <!-- Formulario -->
+    <form [formGroup]="formGroup" class="grid grid-cols-2 md:grid-cols-1 gap-4 max-h-96 overflow-y-auto">
+      <!-- Nombre -->
+      <mat-form-field class="col-span-2">
+        <mat-label>
+          <mat-icon class="text-gray-600">account_circle</mat-icon> Name
+        </mat-label>
+        <input matInput type="text" formControlName="name" class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400"/>
+        @if(nameInput.hasError('required')) {
+          <mat-error class="text-red-500 text-sm mt-1">You must enter a name</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Apellido -->
+      <mat-form-field class="col-span-2">
+        <mat-label>
+          <mat-icon class="text-gray-600">account_circle</mat-icon> Last name
+        </mat-label>
+        <input matInput type="text" formControlName="last_name" class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400"/>
+        @if(last_nameInput.hasError('required')) {
+          <mat-error class="text-red-500 text-sm mt-1">You must enter a last name</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Tipo de usuario -->
+      <mat-form-field>
+        <mat-label>
+          <mat-icon class="text-gray-600">account_circle</mat-icon> Type user
+        </mat-label>
+        <mat-select formControlName="type_user" class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400">
+          <mat-option value="Student">Student</mat-option>
+          <mat-option value="Teacher">Teacher</mat-option>
+          <mat-option value="Secretary">Secretary</mat-option>
+          <mat-option value="Laboratory">Laboratory</mat-option>
+          <mat-option value="Executive">Executive</mat-option>
+          <mat-option value="Administrative">Administrative</mat-option>
+        </mat-select>
+        @if(type_userInput.hasError('required')) {
+          <mat-error class="text-red-500 text-sm mt-1">You must enter a type user</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Nombre de usuario -->
+      <mat-form-field class="col-span-2">
+        <mat-label>
+          <mat-icon class="text-gray-600">account_circle</mat-icon> User name
+        </mat-label>
+        <input matInput type="text" formControlName="user_name" class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400"/>
+        @if(user_nameInput.hasError('required')) {
+          <mat-error class="text-red-500 text-sm mt-1">You must enter a user name</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Email -->
+      <mat-form-field class="col-span-2">
+        <mat-label>
+          <mat-icon class="text-gray-600">account_circle</mat-icon> Email
+        </mat-label>
+        <input matInput type="text" formControlName="email" class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400"/>
+        @if(emailInput.hasError('required')) {
+          <mat-error class="text-red-500 text-sm mt-1">You must enter an email</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Contraseña -->
+      <mat-form-field class="col-span-2">
+        <mat-label>
+          <mat-icon class="text-gray-600">https</mat-icon> Password
+        </mat-label>
+        <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400"/>
+        <a mat-icon-button matSuffix (click)="togglePasswordVisibility($event)">
+          <mat-icon class="text-gray-600">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </a>
+        @if(passwordInput.hasError('required')) {
+          <mat-error class="text-red-500 text-sm mt-1">You must enter a password</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Número de teléfono -->
+      <mat-form-field class="col-span-2">
+        <mat-label>
+          <mat-icon class="text-gray-600">account_circle</mat-icon> Phone number
+        </mat-label>
+        <input matInput type="text" formControlName="phone_number" class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400"/>
+        @if(phone_numberInput.hasError('required')) {
+          <mat-error class="text-red-500 text-sm mt-1">You must enter a phone number</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Estado -->
+      <mat-form-field>
+        <mat-label>
+          <mat-icon class="text-gray-600">account_circle</mat-icon> Status
+        </mat-label>
+        <mat-select formControlName="status" class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400">
+          <mat-option value="Active">Active</mat-option>
+          <mat-option value="Inactive">Inactive</mat-option>
+          <mat-option value="Blocked">Blocked</mat-option>
+          <mat-option value="Suspended">Suspended</mat-option>
+        </mat-select>
+        @if(statusInput.hasError('required')) {
+          <mat-error class="text-red-500 text-sm mt-1">You must enter a status</mat-error>
+        }
+      </mat-form-field>
+    </form>
+
+    <mat-divider class="bg-gray-300 mt-4"></mat-divider>
+
+    <!-- Botón de Update -->
+    <div class="flex justify-center mt-4">
+      <button mat-raised-button mat-dialog-close (click)="updateUser()" [disabled]="disabled" color="primary"
+        class="w-full bg-gray-700 text-white py-2 rounded hover:bg-gray-600 transition-colors flex items-center justify-center">
+        <mat-icon class="mr-1">save</mat-icon> Update
+      </button>
+    </div>
+  </div>
+</div>

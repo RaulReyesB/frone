@@ -1,0 +1,102 @@
+  <div>
+    <div>
+      <button
+      class="mb-4"
+      mat-raised-button
+      color="primary"
+      (click)="abrirRegistrar()"><mat-icon>queue</mat-icon>Registrar</button>
+
+      <button
+        class="mb-4 ml-4"
+        mat-raised-button
+        color="primary"
+        (click)="iniciarScraperHistorico()"
+        [disabled]="!buttonEnable"><mat-icon>adb</mat-icon>Buscar vidocs</button>
+
+        <button
+        class="mb-4 ml-4"
+        mat-raised-button
+        color="primary"
+        (click)="iniciarScraperNotificaciones()"
+        [disabled]="!buttonNotificaciones"><mat-icon>adb</mat-icon>Buscar notificaciones</button>
+    </div>
+
+    <mat-form-field class="w-full">
+      <mat-label><mat-icon>search</mat-icon> Búsqueda</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="MX/?/aaaa/nnnnnn" #input class="w-full">
+    </mat-form-field>
+  </div>
+
+  <div class="flex flex-col">
+    <button mat-icon-button class="float-right mb-2" (click)="reload()"><mat-icon>loop</mat-icon></button>
+    @if (!loading) {
+      <div class="overflow-x-auto w-full">
+        <table mat-table [dataSource]="dataSource" class="text-center">
+          <!-- Columnas de la tabla -->
+          <ng-container matColumnDef="posicion">
+            <th mat-header-cell *matHeaderCellDef class="px-2 py-2 w-10 max-w-10">No.</th>
+            <td mat-cell *matCellDef="let element" class="px-2 py-2 w-10 max-w-10">{{ element.posicion }}</td>
+          </ng-container>
+          <ng-container matColumnDef="noExpediente">
+            <th mat-header-cell *matHeaderCellDef class="px-2 py-2 w-32 max-w-32">No. de Expediente</th>
+            <td mat-cell *matCellDef="let element" class="px-2 py-2 w-32 max-w-32">{{ element.noExpediente }}</td>
+          </ng-container>
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef class="px-2 py-2 w-32 max-w-32">Estatus</th>
+            <td mat-cell *matCellDef="let element" class="px-2 py-2 w-10 max-w-10">{{ element.status == true ? 'En proceso' : 'Finalizado' }}</td>
+          </ng-container>
+          <ng-container matColumnDef="fechaPresentacion">
+            <th mat-header-cell *matHeaderCellDef class="px-2 py-2 w-20 max-w-20">Fecha de Presentación</th>
+            <td mat-cell *matCellDef="let element" class="px-2 py-2 w-20 max-w-20">
+              {{ element.fechaPresentacion ? element.fechaPresentacion : 'Por definir' }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="solicitantes">
+            <th mat-header-cell *matHeaderCellDef class="px-2 py-2 w-48 max-w-48">Solicitantes</th>
+            <td mat-cell *matCellDef="let element" class="px-2 py-2 w-48 max-w-48">
+              <span [innerHTML]="imprimirStr(element.Institutos, 'Institutos')"></span>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="inventores">
+            <th mat-header-cell *matHeaderCellDef class="px-2 py-2 w-48 max-w-48">Inventores</th>
+            <td mat-cell *matCellDef="let element" class="px-2 py-2 w-48 max-w-48">
+              <span [innerHTML]="imprimirStr(element.Inventores, 'Inventores')"></span>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="titulo">
+            <th mat-header-cell *matHeaderCellDef class="px-2 py-2 w-48 max-w-48">Título</th>
+            <td mat-cell *matCellDef="let element" class="px-2 py-2 w-48 max-w-48 ">{{ element.titulo ? element.titulo : 'Por definir' }}</td>
+          </ng-container>
+          <ng-container matColumnDef="resumen">
+            <th mat-header-cell *matHeaderCellDef class="px-2 py-2">Resumen</th>
+            <td mat-cell *matCellDef="let element" class="px-2 py-2 w-24 max-w-24">
+              @if (element.resumen) {
+                <button mat-icon-button (click)="openDialog(element.resumen)">
+                  <mat-icon>description</mat-icon>
+                </button>
+                <button mat-icon-button color="primary" (click)="abrirVidoc(element.noExpediente)" class="py-2 ml-4">
+                  <mat-icon>open_in_new</mat-icon>
+                  <p>Ver vidoc</p>
+                </button>
+              } @else {
+                <p>Por definir</p>
+              }
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
+    }
+  </div>
+  <mat-paginator
+    [length]="dataSource.data.length"
+    [pageSize]="7"
+    showFirstLastButtons>
+  </mat-paginator>
+
+  @if (loading) {
+    <div class="flex justify-center">
+      <app-spinner></app-spinner>
+    </div>
+  }

@@ -1,0 +1,54 @@
+<div class="w-full">
+    <button class="text-black w-16 rounded-r-lg mt-4 float-right" mat-dialog-close><mat-icon>close</mat-icon></button>
+</div>
+<mat-divider/>
+<div class="Register px-4 py-3 w-full mx-auto">
+    <!-- Tabla de register -->
+    <form class="grid grid-cols-2 md:grid-cols-1 gap-4 max-h-96 overflow-y-auto" [formGroup]="formGroup">
+        <mat-form-field class="col-span-2">
+            <mat-label><mat-icon>account_circle</mat-icon>User ID</mat-label>
+            <mat-select formControlName="id_user">
+                @for(user of userData; track user) {
+                    <mat-option value="{{ user.id }}">{{ user.user_name }}</mat-option>
+                }
+            </mat-select>
+            @if(id_userInput.hasError('required')) {
+                <mat-error>You must select a user</mat-error>
+            }
+        </mat-form-field>
+        <mat-form-field class="col-span-2">
+            <mat-label><mat-icon>account_circle</mat-icon>Material</mat-label>
+            <mat-select formControlName="id_material">
+                @for(material of materialData; track material) {
+                    <mat-option value="{{ material.ID_Material }}">{{ material.material_type }}</mat-option>
+                }
+            </mat-select>
+            @if(id_userInput.hasError('required')) {
+                <mat-error>You must select a material</mat-error>
+            }
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label><mat-icon>account_circle</mat-icon>Status</mat-label>
+            <mat-select formControlName="status">
+              <mat-option value="Active">Active</mat-option>
+              <mat-option value="Inactive" >Inactive</mat-option>
+              <mat-option value="Blocked">Blocked</mat-option>
+            </mat-select>
+            @if(statusInput.hasError('required')) {
+                <mat-error>You must select a status</mat-error>
+            }
+        </mat-form-field>
+        
+    </form>
+      
+<mat-divider/>
+<div class="flex justify-between mt-4">
+    <button
+        mat-raised-button
+        mat-dialog-close
+        (click)="newLoan()"
+        [disabled]="disabled"
+        color="primary"><mat-icon>add_box</mat-icon> Registrar</button>
+    </div>
+</div>
+  

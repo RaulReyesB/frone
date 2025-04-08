@@ -1,0 +1,47 @@
+<section class="relative mx-auto w-full">
+  <nav class="flex justify-between bg-black text-yellow-400 w-full shadow-lg">
+    <div class="px-5 xl:px-12 py-4 flex items-center w-full">
+      <img class="max-h-16 cursor-pointer" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTw7Jb1I9FH9Jc9WcgR0dFrK2ZmvglnoTJeDQ&s" alt="TICS" [routerLink]="['/dashboard']">
+      <ul class="hidden md:flex px-4 mx-auto font-semibold space-x-8">
+        <li><a [routerLink]="['/dashboard']" class="hover:text-yellow-500 transition-colors">Inicio</a></li>
+        <li><a [routerLink]="['/dashboard/user']" class="hover:text-yellow-500 transition-colors">Users</a></li>
+        <li><a [routerLink]="['/dashboard/materials']" class="hover:text-yellow-500 transition-colors">Materials</a></li>
+        <li><a [routerLink]="['/dashboard/loans']" class="hover:text-yellow-500 transition-colors">Loans</a></li>
+      </ul>
+      <div class="hidden xl:flex items-center space-x-5 ml-8">
+        <button class="p-2 rounded hover:bg-yellow-500 hover:text-black transition-colors" (click)="openDialog('300ms', '150ms')">
+          <svg class="w-6 h-6" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 16 16">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h11m0 0-4-4m4 4-4 4m-5 3H3a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h3"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="flex items-center space-x-5 mr-5">
+      <mat-icon matBadge="{{ showBadge ? '‎' : '' }}" (click)="openDialogTwo('300ms', '150ms')" class="cursor-pointer hover:text-yellow-500 transition-colors">
+        notifications
+      </mat-icon>
+      <span class="sr-only">Notificaciones</span>
+      <a (click)="toggleMenu()" class="xl:hidden flex mr-4 items-center cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </a>
+    </div>
+  </nav>
+
+  @if(menu) {
+    <div  class="fixed top-16 right-4 z-50">
+      <div class="bg-black p-4 rounded-lg shadow-lg w-48">
+        <ul class="flex flex-col space-y-2 text-yellow-400">
+          <li><a [routerLink]="['/dashboard']" class="hover:text-yellow-500 transition-colors">Inicio</a></li>
+          <li><a [routerLink]="['/dashboard/register']" class="hover:text-yellow-500 transition-colors">Registrar</a></li>
+          <li><a [routerLink]="['/dashboard/inventors']" class="hover:text-yellow-500 transition-colors">Inventores</a></li>
+          <li><a [routerLink]="['/dashboard/notifications']" class="hover:text-yellow-500 transition-colors">Notificaciones</a></li>
+          <li><a [routerLink]="['/dashboard/viewLogs']" class="hover:text-yellow-500 transition-colors">Logs</a></li>
+          <li><a (click)="openDialog('300ms', '150ms')" class="hover:text-yellow-500 transition-colors cursor-pointer">Cerrar sesión</a></li>
+        </ul>
+      </div>
+    </div>
+  }
+</section>

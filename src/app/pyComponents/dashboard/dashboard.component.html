@@ -1,0 +1,23 @@
+<div class="w-screen min-h-screen bg-gray-100">
+  <app-navbar></app-navbar>
+  <div class="py-8 px-4">
+    @if (dashboard()) {
+      <div class="max-w-xl mx-auto my-4">
+        <div class="bg-gray-200 shadow-lg rounded-lg tracking-wide overflow-hidden">
+          <img
+            src="https://1000marcas.net/wp-content/uploads/2020/03/Logo-Caterpillar.png"
+            alt="INAOE"
+            class="w-full h-56 object-cover"
+          />
+          <div class="px-4 py-6">
+            <h2 class="text-2xl font-bold text-gray-800">Bienvenido {{ usuario }}.</h2>
+            <p class="mt-2 text-sm text-gray-700 text-justify">
+              Hola
+            </p>
+          </div>
+        </div>
+      </div>
+    }
+    <router-outlet></router-outlet>
+  </div>
+</div>

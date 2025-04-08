@@ -1,0 +1,86 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+    <div class="bg-gray-200 p-8 rounded-lg shadow-md w-full max-w-lg relative">
+      <!-- Botón de cierre -->
+      <div class="absolute top-4 right-4">
+        <button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-300 transition-colors" mat-dialog-close>
+          <mat-icon class="text-gray-800">close</mat-icon>
+        </button>
+      </div>
+  
+      <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">Registrar Material</h2>
+      <mat-divider class="bg-gray-300 mb-4"></mat-divider>
+  
+      <form [formGroup]="formGroup" class="grid grid-cols-2 md:grid-cols-1 gap-4 max-h-96 overflow-y-auto">
+        <!-- Material type -->
+        <mat-form-field class="col-span-2">
+          <mat-label>
+            <mat-icon class="text-gray-600">account_circle</mat-icon> Material type
+          </mat-label>
+          <input 
+            matInput 
+            type="text" 
+            formControlName="material_type" 
+            class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400" />
+          @if(material_typeInput.hasError('required')) {
+            <mat-error class="text-red-500 text-sm mt-1">You must enter a material type</mat-error>
+          }
+        </mat-form-field>
+  
+        <!-- Brand -->
+        <mat-form-field class="col-span-2">
+          <mat-label>
+            <mat-icon class="text-gray-600">account_circle</mat-icon> Brand
+          </mat-label>
+          <input 
+            matInput 
+            type="text" 
+            formControlName="brand" 
+            class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400" />
+          @if(brandInput.hasError('required')) {
+            <mat-error class="text-red-500 text-sm mt-1">You must enter a brand</mat-error>
+          }
+        </mat-form-field>
+  
+        <!-- Model -->
+        <mat-form-field class="col-span-2">
+          <mat-label>
+            <mat-icon class="text-gray-600">account_circle</mat-icon> Model
+          </mat-label>
+          <input 
+            matInput 
+            type="text" 
+            formControlName="model" 
+            class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400" />
+          @if(modelInput.hasError('required')) {
+            <mat-error class="text-red-500 text-sm mt-1">You must enter a model</mat-error>
+          }
+        </mat-form-field>
+  
+        <!-- State -->
+        <mat-form-field class="col-span-2">
+          <mat-label>
+            <mat-icon class="text-gray-600">account_circle</mat-icon> State
+          </mat-label>
+          <mat-select formControlName="state" class="w-full">
+            <mat-option value="Available">Available</mat-option>
+            <mat-option value="Unavailable">Unavailable</mat-option>
+            <mat-option value="Loaned">Loaned</mat-option>
+            <mat-option value="Maintenance">Maintenance</mat-option>
+          </mat-select>
+          @if(stateInput.hasError('required')) {
+            <mat-error class="text-red-500 text-sm mt-1">You must enter a state</mat-error>
+          }
+        </mat-form-field>
+      </form>
+  
+      <mat-divider class="bg-gray-300 my-4"></mat-divider>
+  
+      <div class="flex justify-center">
+        <button mat-raised-button mat-dialog-close (click)="newMaterial()" [disabled]="disabled" color="primary"
+          class="w-full bg-gray-700 text-white py-2 rounded hover:bg-gray-600 transition-colors flex items-center justify-center">
+          <mat-icon class="mr-1">add_box</mat-icon> Registrar
+        </button>
+      </div>
+    </div>
+  </div>
+  
